@@ -12,5 +12,32 @@ const server = express();
 server.use(bodyParser.json());
 
 // TODO: your code to handle requests
+server.get('/posts', (req, res) => {
+  res.status(200);
+  res.json(posts);
+});
+
+server.get('/posts/:id', (req, res) => {
+  res.status(200);
+  res.json(posts[req.params.id]);
+});
+
+server.post('/posts', (req, res) => {
+  posts.push(req.body);
+  res.status(200);
+  res.json(posts);
+});
+
+server.put('/posts/:id', (req, res) => {
+  posts[req.params.id] = req.body;
+  res.status(200);
+  res.json(req.body);
+});
+
+server.delete('/posts/:id', (req, res) => {
+  posts.splice(req.params.id, 1);
+  res.status(200);
+  res.json(req.body);
+});
 
 module.exports = { posts, server };
